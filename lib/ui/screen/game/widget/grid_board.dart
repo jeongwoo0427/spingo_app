@@ -1,47 +1,50 @@
 import 'package:flutter/material.dart';
 
 class GridBoard extends StatelessWidget {
-  const GridBoard({super.key});
+  final int gridCount;
+
+  const GridBoard({super.key,required this.gridCount});
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-          decoration: BoxDecoration(color: colorScheme.surface, boxShadow: const [
-            BoxShadow(
-                offset: Offset(0.0, 0.0),
-                spreadRadius: 5,
-                color: Colors.black12,
-                blurRadius: 30)
-          ]),
-          child: const Stack(
-            children: [
-              Positioned.fill(
-                  child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GridHorizontalDivider(),
-                  GridHorizontalDivider(),
-                  GridHorizontalDivider(),
-                ],
-              )),
-              Positioned.fill(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GridVerticalDivider(),
-                      GridVerticalDivider(),
-                      GridVerticalDivider()
-                    ],
-                  ))
-            ],
-          )),
-    );
+
+    final List<Widget> horizontalGrids = [];
+    final List<Widget> verticalGrids = [];
+
+    for(int i = 0; i<gridCount-1; i++){
+      horizontalGrids.add(GridHorizontalDivider());
+      verticalGrids.add(GridVerticalDivider());
+    }
+
+
+    return Container(
+        decoration: BoxDecoration(color: colorScheme.surface, boxShadow: const [
+          BoxShadow(
+              offset: Offset(0.0, 0.0),
+              spreadRadius: 5,
+              color: Colors.black12,
+              blurRadius: 30)
+        ]),
+        child: Stack(
+          children: [
+            Positioned.fill(
+                child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: horizontalGrids,
+            )),
+            Positioned.fill(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: verticalGrids,
+                ))
+          ],
+        ));
   }
+
+
 }
 
 class GridHorizontalDivider extends StatelessWidget {

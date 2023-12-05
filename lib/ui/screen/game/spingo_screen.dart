@@ -23,10 +23,13 @@ class _SpingoScreenState extends State<SpingoScreen> {
         children: [
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Stack(
-                children: [
-                  GridBoard(),
-                ],
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Stack(
+                  children: [
+                    Positioned.fill(child: GridBoard(gridCount: 4,)),
+                  ],
+                ),
               ))
         ],
       ),
