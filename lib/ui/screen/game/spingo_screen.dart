@@ -22,15 +22,19 @@ class _SpingoScreenState extends State<SpingoScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Stack(
-                  children: [
-                    Positioned.fill(child: GridBoard(gridCount: 4,)),
-                  ],
-                ),
-              ))
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                      child: GridBoard(
+                    gridCount: 4,
+                  )),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
