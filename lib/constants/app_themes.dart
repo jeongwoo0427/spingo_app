@@ -101,3 +101,8 @@ class AppThemes {
     ),
   );
 }
+
+class AppColors{
+  static const Color blueStoneColor = Color(0xFF69AEFF);
+  static const Color redStoneColor = Color(0xFFFF8686);
+}

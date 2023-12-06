@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spingo/ui/screen/game/widget/grid_board.dart';
+import 'package:spingo/ui/screen/game/widget/stone.dart';
 import 'package:spingo/ui/widget/scaffold/responsive_scaffold.dart';
 
 class SpingoScreen extends StatefulWidget {
@@ -28,9 +29,11 @@ class _SpingoScreenState extends State<SpingoScreen> {
               child: Stack(
                 children: [
                   Positioned.fill(
-                      child: GridBoard(
-                    gridCount: 4,
-                  )),
+                    child: GridBoard(
+                      gridCount: 4,
+                    ),
+                  ),
+                  Positioned(top: 0,left: 0,child: Stone(isBlueStone: true,))
                 ],
               ),
             ),
