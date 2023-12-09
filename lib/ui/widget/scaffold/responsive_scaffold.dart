@@ -6,13 +6,15 @@ class ResponsiveScaffold extends StatelessWidget {
   final Widget? body;
   final Widget? endDrawer;
   final Color? backgroundColor;
+  final double? maxWidth;
 
   const ResponsiveScaffold(
       {super.key,
       this.appBar,
       this.body,
       this.endDrawer,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.maxWidth});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ConstrainedLayout extends StatelessWidget {
   final double maxWidth;
   final Widget child;
-  const ConstrainedLayout({Key? key,this.maxWidth = 700,required this.child}) : super(key: key);
+  const ConstrainedLayout({Key? key,this.maxWidth = 600,required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
