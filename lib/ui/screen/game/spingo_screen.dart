@@ -12,33 +12,28 @@ class SpingoScreen extends StatefulWidget {
 }
 
 class _SpingoScreenState extends State<SpingoScreen> {
-  final GlobalKey _boardKey = GlobalKey();
 
-  Size _boardSize = Size.zero;
+  final double _maxBoardWidth = 600;
   int _linearGridCount = 6;
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      //initState 직후 build 전에 미리 위젯을 정의
-      _boardSize = _boardKey.currentContext!.size!;
-      setState(() {});
-    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     //print('SpingoScreen_build : Board width = ${_getBoardSize()?.width}');
-    final Size screenSize = MediaQuery.of(context).size;
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-
+    final Size screenSize = MediaQuery.of(context).size;
+    final Size boardSize = screenSize.width <= _maxBoardWidth ?Size(screenSize.width*0.9,screenSize.width*0.9):Size(_maxBoardWidth,_maxBoardWidth);
 
     List<Widget> positionedBlocks = [];
 
     final int _gridCount = _linearGridCount * _linearGridCount;
-    final double _gridWidth = _boardSize.width/_linearGridCount;
-    final double _gridHeight = _boardSize.height / _linearGridCount;
+    final double _gridWidth = boardSize.width/_linearGridCount;
+    final double _gridHeight = boardSize.height / _linearGridCount;
 
     for (int i = 0; i < _gridCount; i++) {
       final int quotient = i ~/ _linearGridCount;
@@ -56,20 +51,20 @@ class _SpingoScreenState extends State<SpingoScreen> {
       positionedBlocks.add(positionedBlock);
     }
 
-    return ResponsiveScaffold(
+    return Scaffold(
       backgroundColor: colorScheme.background,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(_boardSize.height.toString()),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+          //Text(_boardSize.height.toString()),
+          SizedBox(width: double.infinity,),
+          SizedBox(
+            width: boardSize.width,
             child: AspectRatio(
               aspectRatio: 1,
               child: Stack(
-                key: _boardKey,
                 children: [
                   Positioned.fill(
                     child: GridBoard(
