@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spingo/ui/screen/game/spingo_screen.dart';
 import 'package:spingo/ui/screen/home/home_screen.dart';
+import 'package:spingo/ui/screen/test_screen.dart';
 
 class RouteNames {
 
@@ -16,7 +17,7 @@ class AppRouter {
     GoRoute(path: '/spingo',name: RouteNames.RN_spingo_screen, pageBuilder: defaultPageBuilder(SpingoScreen())),
 
 
-    //GoRoute(name: RouteNames.RN_test_screen, path: '/test', pageBuilder: defaultPageBuilder(TestScreen())),
+    GoRoute(path: '/test',name: RouteNames.RN_test_screen, pageBuilder: defaultPageBuilder(TestScreen())),
   ]);
 }
 
