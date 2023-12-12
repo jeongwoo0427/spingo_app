@@ -29,22 +29,22 @@ class _SpingoScreenState extends State<SpingoScreen> {
   void _initBlockBelts() {
     _blockBelts = [
       [
-        BlockData(valueNo: 1, state: BlockState.blue), //0,0
-        BlockData(valueNo: 2, state: BlockState.blue), //0,1
-        BlockData(valueNo: 3, state: BlockState.blue), //0,2
+        BlockData(valueNo: 1, state: BlockState.none), //0,0
+        BlockData(valueNo: 2, state: BlockState.none), //0,1
+        BlockData(valueNo: 3, state: BlockState.none), //0,2
         BlockData(valueNo: 4, state: BlockState.blue), //0,3
       ],
       [
-        BlockData(valueNo: 5, state: BlockState.blue), //1,0
-        BlockData(valueNo: 6, state: BlockState.blue), //1,1
-        BlockData(valueNo: 7, state: BlockState.blue), //1,2
-        BlockData(valueNo: 8, state: BlockState.blue), //1,3
+        BlockData(valueNo: 5, state: BlockState.none), //1,0
+        BlockData(valueNo: 6, state: BlockState.none), //1,1
+        BlockData(valueNo: 7, state: BlockState.none), //1,2
+        BlockData(valueNo: 8, state: BlockState.none), //1,3
         BlockData(valueNo: 9, state: BlockState.blue), //1,4
-        BlockData(valueNo: 10, state: BlockState.blue), //1,5
-        BlockData(valueNo: 11, state: BlockState.blue), //1,6
-        BlockData(valueNo: 12, state: BlockState.blue), //1,7
-        BlockData(valueNo: 13, state: BlockState.blue), //1,8
-        BlockData(valueNo: 14, state: BlockState.blue), //1,9
+        BlockData(valueNo: 10, state: BlockState.none), //1,5
+        BlockData(valueNo: 11, state: BlockState.none), //1,6
+        BlockData(valueNo: 12, state: BlockState.none), //1,7
+        BlockData(valueNo: 13, state: BlockState.none), //1,8
+        BlockData(valueNo: 14, state: BlockState.none), //1,9
         BlockData(valueNo: 15, state: BlockState.blue), //1,10
         BlockData(valueNo: 16, state: BlockState.blue), //1,11
       ]
@@ -121,6 +121,12 @@ class _SpingoScreenState extends State<SpingoScreen> {
           stoneData: _blockDimensions[yPosition][xPosition],
           height: _gridHeight,
           width: _gridWidth,
+          onTap: (){
+            setState(() {
+              _blockDimensions[yPosition][xPosition].state = BlockState.blue;
+            });
+            _spin();
+          },
         ),
       );
 
