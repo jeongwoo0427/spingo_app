@@ -28,28 +28,16 @@ class StoneBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget stone = SizedBox();
 
-    if (stoneData.state == BlockState.red) {
+    if (stoneData.state == BlockState.red ||
+        stoneData.state == BlockState.blue) {
       stone = Container(
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.redStoneColor,
-            boxShadow: [
-              BoxShadow(
-                  offset: Offset(0.0, 0.0),
-                  color: Colors.black12,
-                  blurRadius: 3,
-                  spreadRadius: 3)
-            ]),
-      );
-    } else if (stoneData.state == BlockState.blue) {
-      stone = Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.blueStoneColor,
+            color: stoneData.state == BlockState.red
+                ? AppColors.redStoneColor
+                : AppColors.blueStoneColor,
             boxShadow: [
               BoxShadow(
                   offset: Offset(0.0, 0.0),
