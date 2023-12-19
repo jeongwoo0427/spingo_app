@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
                 delay: Duration(milliseconds: 1000),
                 child: RoundedElevatedButton(
         onPressed: () {
-          context.goNamed(RouteNames.RN_spingo_screen);
+          context.goNamed(RouteNames.RN_online_play_screen);
         },
         child: Text('온라인 플레이'),
       ),

@@ -5,18 +5,19 @@ import 'package:spingo/ui/screen/game/widget/stone_block.dart';
 import 'package:spingo/ui/widget/button/rounded_elevated_button.dart';
 import 'package:spingo/ui/widget/scaffold/responsive_scaffold.dart';
 
-class SpingoScreen extends StatefulWidget {
-  const SpingoScreen({super.key});
+class SpingoWidget extends StatefulWidget {
+  const SpingoWidget({super.key});
 
   @override
-  State<SpingoScreen> createState() => _SpingoScreenState();
+  State<SpingoWidget> createState() => _SpingoWidgetState();
 }
 
-class _SpingoScreenState extends State<SpingoScreen> {
+class _SpingoWidgetState extends State<SpingoWidget> {
   final double _maxBoardWidth = 600;
   final beltCount = 2;
   late List<List<BlockData>> _blockBelts;
   late List<List<BlockData>> _blockDimensions;
+
 
   @override
   void initState() {
@@ -133,38 +134,20 @@ class _SpingoScreenState extends State<SpingoScreen> {
       positionedBlocks.add(positionedBlock);
     }
 
-    return Scaffold(
-      backgroundColor: colorScheme.background,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Text(_boardSize.height.toString()),
-          SizedBox(
-            width: double.infinity,
-          ),
-          SizedBox(
-            width: boardSize.width,
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: GridBoard(
-                      gridCount: _linearGridCount,
-                    ),
-                  ),
-                  ...positionedBlocks
-                ],
+    return    SizedBox(
+      width: boardSize.width,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: GridBoard(
+                gridCount: _linearGridCount,
               ),
             ),
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          RoundedElevatedButton(onPressed: _spin, child: Text('Shake'))
-        ],
+            ...positionedBlocks
+          ],
+        ),
       ),
     );
   }

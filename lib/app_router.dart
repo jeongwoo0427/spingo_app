@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spingo/ui/screen/game/spingo_screen.dart';
+import 'package:spingo/ui/screen/game/online_play_screen.dart';
+import 'package:spingo/ui/screen/game/widget/spingo_widget.dart';
 import 'package:spingo/ui/screen/home/home_screen.dart';
 import 'package:spingo/ui/screen/test_screen.dart';
 
 class RouteNames {
 
-  static const String RN_spingo_screen = 'SpingoScreen';
+  static const String RN_online_play_screen = 'OnlinePlayScreen';
 
   static const String RN_test_screen = 'TestScreen';
 }
@@ -14,7 +15,7 @@ class RouteNames {
 class AppRouter {
   final GoRouter router = GoRouter(initialLocation: '/', routes: [
     GoRoute(path: '/', pageBuilder: defaultPageBuilder(HomeScreen())),
-    GoRoute(path: '/spingo',name: RouteNames.RN_spingo_screen, pageBuilder: defaultPageBuilder(SpingoScreen())),
+    GoRoute(path: '/online',name: RouteNames.RN_online_play_screen, pageBuilder: defaultPageBuilder(OnlinePlayScreen())),
 
 
     GoRoute(path: '/test',name: RouteNames.RN_test_screen, pageBuilder: defaultPageBuilder(TestScreen())),
