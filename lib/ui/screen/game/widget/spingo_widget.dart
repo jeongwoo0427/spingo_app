@@ -14,10 +14,11 @@ class SpingoWidget extends StatefulWidget {
 
 class _SpingoWidgetState extends State<SpingoWidget> {
   final double _maxBoardWidth = 600;
-  final beltCount = 2;
+  final _beltCount = 2;
   late List<List<BlockData>> _blockBelts;
   late List<List<BlockData>> _blockDimensions;
 
+  bool isRedTurn = true;
 
   @override
   void initState() {
@@ -122,9 +123,15 @@ class _SpingoWidgetState extends State<SpingoWidget> {
           stoneData: _blockDimensions[yPosition][xPosition],
           height: _gridHeight,
           width: _gridWidth,
-          onTap: (){
+          onTap: () {
             setState(() {
-              _blockDimensions[yPosition][xPosition].state = BlockState.blue;
+              if (isRedTurn) {
+                _blockDimensions[yPosition][xPosition].state = BlockState.red;
+                isRedTurn = false;
+              } else {
+                _blockDimensions[yPosition][xPosition].state = BlockState.blue;
+                isRedTurn = true;
+              }
             });
             _spin();
           },
@@ -134,7 +141,7 @@ class _SpingoWidgetState extends State<SpingoWidget> {
       positionedBlocks.add(positionedBlock);
     }
 
-    return    SizedBox(
+    return SizedBox(
       width: boardSize.width,
       child: AspectRatio(
         aspectRatio: 1,
@@ -153,7 +160,6 @@ class _SpingoWidgetState extends State<SpingoWidget> {
   }
 
   void _spin() {
-
     final BlockData blockData1 = _blockBelts[0].last;
     _blockBelts[0].removeLast();
     _blockBelts[0].insert(0, blockData1);
