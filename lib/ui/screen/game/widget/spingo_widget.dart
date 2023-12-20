@@ -34,21 +34,21 @@ class _SpingoWidgetState extends State<SpingoWidget> {
         BlockData(valueNo: 1, state: BlockState.none), //0,0
         BlockData(valueNo: 2, state: BlockState.none), //0,1
         BlockData(valueNo: 3, state: BlockState.none), //0,2
-        BlockData(valueNo: 4, state: BlockState.blue), //0,3
+        BlockData(valueNo: 4, state: BlockState.none), //0,3
       ],
       [
         BlockData(valueNo: 5, state: BlockState.none), //1,0
         BlockData(valueNo: 6, state: BlockState.none), //1,1
         BlockData(valueNo: 7, state: BlockState.none), //1,2
         BlockData(valueNo: 8, state: BlockState.none), //1,3
-        BlockData(valueNo: 9, state: BlockState.blue), //1,4
+        BlockData(valueNo: 9, state: BlockState.none), //1,4
         BlockData(valueNo: 10, state: BlockState.none), //1,5
         BlockData(valueNo: 11, state: BlockState.none), //1,6
         BlockData(valueNo: 12, state: BlockState.none), //1,7
         BlockData(valueNo: 13, state: BlockState.none), //1,8
         BlockData(valueNo: 14, state: BlockState.none), //1,9
-        BlockData(valueNo: 15, state: BlockState.blue), //1,10
-        BlockData(valueNo: 16, state: BlockState.blue), //1,11
+        BlockData(valueNo: 15, state: BlockState.none), //1,10
+        BlockData(valueNo: 16, state: BlockState.none), //1,11
       ]
     ];
   }
@@ -164,9 +164,13 @@ class _SpingoWidgetState extends State<SpingoWidget> {
     _blockBelts[0].removeLast();
     _blockBelts[0].insert(0, blockData1);
 
-    final BlockData blockData2 = _blockBelts[1][0];
-    _blockBelts[1].removeAt(0);
-    _blockBelts[1].add(blockData2);
+    final BlockData blockData2 = _blockBelts[1].last;
+    _blockBelts[1].removeLast();
+    _blockBelts[1].insert(0,blockData2);
+
+    // final BlockData blockData2 = _blockBelts[1][0];
+    // _blockBelts[1].removeAt(0);
+    // _blockBelts[1].add(blockData2);
 
     _fetchBlockDimensions();
 
