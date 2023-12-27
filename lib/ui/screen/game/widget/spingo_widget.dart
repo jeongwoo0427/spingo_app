@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:spingo/ui/screen/game/widget/grid_board.dart';
@@ -5,8 +7,18 @@ import 'package:spingo/ui/screen/game/widget/stone_block.dart';
 import 'package:spingo/ui/widget/button/rounded_elevated_button.dart';
 import 'package:spingo/ui/widget/scaffold/responsive_scaffold.dart';
 
+class SpingoController {
+  Function spin = (){};
+  Function(int xPosition, int yPosition, BlockState state) changeBlockState = (x,y,s){};
+
+  SpingoController();
+}
+
 class SpingoWidget extends StatefulWidget {
-  const SpingoWidget({super.key});
+
+  final SpingoController controller;
+
+  const SpingoWidget({super.key, required this.controller});
 
   @override
   State<SpingoWidget> createState() => _SpingoWidgetState();
@@ -15,6 +27,8 @@ class SpingoWidget extends StatefulWidget {
 class _SpingoWidgetState extends State<SpingoWidget> {
   final double _maxBoardWidth = 600;
   final _beltCount = 2;
+  late final SpingoController _controller;
+
   late List<List<BlockData>> _blockBelts;
   late List<List<BlockData>> _blockDimensions;
 
@@ -23,9 +37,20 @@ class _SpingoWidgetState extends State<SpingoWidget> {
   @override
   void initState() {
     super.initState();
-
+    _syncController();
     _initBlockBelts();
     _fetchBlockDimensions();
+  }
+
+
+  void _syncController() {
+    _controller = widget.controller;
+    _controller.spin = (){
+      _spin();
+    };
+    _controller.changeBlockState = (xPosition,yPosition,state){
+      _changeBlockState(xPosition, yPosition, state);
+    };
   }
 
   void _initBlockBelts() {
@@ -123,18 +148,7 @@ class _SpingoWidgetState extends State<SpingoWidget> {
           stoneData: _blockDimensions[yPosition][xPosition],
           height: _gridHeight,
           width: _gridWidth,
-          onTap: () {
-            setState(() {
-              if (isRedTurn) {
-                _blockDimensions[yPosition][xPosition].state = BlockState.red;
-                isRedTurn = false;
-              } else {
-                _blockDimensions[yPosition][xPosition].state = BlockState.blue;
-                isRedTurn = true;
-              }
-            });
-            _spin();
-          },
+          onTap: () => _onTapBlock(xPosition,yPosition),
         ),
       );
 
@@ -157,6 +171,23 @@ class _SpingoWidgetState extends State<SpingoWidget> {
         ),
       ),
     );
+  }
+
+  void _onTapBlock(int xPosition, int yPosition){
+    if (isRedTurn) {
+      _changeBlockState(xPosition, yPosition, BlockState.red);
+      isRedTurn = false;
+    } else {
+      _changeBlockState(xPosition, yPosition, BlockState.blue);
+      isRedTurn = true;
+    }
+    _spin();
+  }
+
+  void _changeBlockState(int xPosition, int yPosition, BlockState state){
+    setState(() {
+      _blockDimensions[yPosition][xPosition].state = state;
+    });
   }
 
   void _spin() {
