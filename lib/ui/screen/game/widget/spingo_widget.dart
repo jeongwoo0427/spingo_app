@@ -8,8 +8,8 @@ import 'package:spingo/ui/widget/button/rounded_elevated_button.dart';
 import 'package:spingo/ui/widget/scaffold/responsive_scaffold.dart';
 
 class SpingoController {
-  Function spin = (){};
-  Function(int xPosition, int yPosition, BlockState state) changeBlockState = (x,y,s){};
+  late final Function spin;
+  late final Function(int xPosition, int yPosition, BlockState state) changeBlockState;
 
   SpingoController();
 }
