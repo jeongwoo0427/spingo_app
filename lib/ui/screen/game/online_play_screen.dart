@@ -27,7 +27,7 @@ class _OnlinePlayScreenState extends State<OnlinePlayScreen> {
         children: [
           SizedBox(width: double.infinity,),
           SpingoWidget(
-            controller: SpingoController(),
+            controller: _spingoController,
           ),
         ],
       ),
